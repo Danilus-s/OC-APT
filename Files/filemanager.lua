@@ -356,7 +356,7 @@ while true do
                     select(b)
                     fg(0xFFFFFF)
                     bg(0x606060)
-                    gpu.fill(3, h, 10, 1, " ")                    
+                    gpu.fill(3, h, 20, 1, " ")                    
                     if oldSel == 0 then
                         gpu.set(3, h, tostring(#list) .. "|" .. oldSel)
                     elseif not list[oldSel].isDir then

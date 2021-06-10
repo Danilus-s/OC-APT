@@ -263,7 +263,7 @@ local function Back_Pressed()
         updateList()
         fg(0xFFFFFF)
         bg(0x606060)
-        gpu.fill(3, h, 5, 1, " ")
+        gpu.fill(3, h, 20, 1, " ")
         gpu.set(3, h, tostring(#list) .. "|0")
     end
     info.to = workDir
@@ -277,7 +277,7 @@ local function Home_Pressed()
     updateList()
     fg(0xFFFFFF)
     bg(0x606060)
-    gpu.fill(3, h, 5, 1, " ")
+    gpu.fill(3, h, 20, 1, " ")
     gpu.set(3, h, tostring(#list) .. "|0")
     info.to = workDir
     updateInfo()
@@ -331,7 +331,7 @@ updateList()
 
 fg(0xFFFFFF)
 bg(0x606060)
-gpu.fill(3, h, 5, 1, " ")
+gpu.fill(3, h, 20, 1, " ")
 gpu.set(3, h, tostring(#list) .. "|0")
 while true do
     local n,_,x,y,s = event.pull()
@@ -383,7 +383,7 @@ while true do
                         updateList()
                         fg(0xFFFFFF)
                         bg(0x606060)
-                        gpu.fill(3, h, 5, 1, " ")
+                        gpu.fill(3, h, 20, 1, " ")
                         gpu.set(3, h, tostring(#list) .. "|" .. oldSel)
                         info.to = workDir
                         updateInfo()

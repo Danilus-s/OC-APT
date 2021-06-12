@@ -11,14 +11,34 @@ local gpu = c.gpu
 if not c.isAvailable("modem") then print("`modem' not available"); return end
 
 local args, opt = s.parse(...)
-if #args < 3 then print("Use `chat connect [address] [password] [name?]'\nor `chat host [roomName] [password]'"); return end
+if args[1] == "maketoken" then
+  local f = io.open((os.getenv("HOME") or "") .. "/token", "w")
+  f:write(m.address)
+  f:close()
+  return
+end
+if #args < 3 then print("Use `chat connect [address] [password]'\nor `chat host [roomName] [password] [name?]'\nor `chat token [token] [password]'\nor `chat maketoken'"); return end
+
+
 
 local w,h = gpu.getResolution()
 local pass =  sha.sha3_256(args[3])
 local conn = {}
 local adr, name
 local host = false
-if args[1] == "host" then name = args[2]; host = true elseif args[1] == "connect" then adr = args[2] else print("Use `chat connect [address] [password]'\nor `chat host [roomName] [password]'"); return end
+if args[1] == "host" then
+  name = args[2]
+  host = true
+elseif args[1] == "connect" then
+  adr = args[2]
+elseif args[1] == "token" then
+  local f = io.open(require("shell").resolve(args[2]))
+  adr = f:read()
+  f:close()
+else
+  print("Use `chat connect [address] [password]'\nor `chat host [roomName] [password] [name?]'\nor `chat token [token] [password]'\nor `chat maketoken'")
+  return
+end
 
 m.open(89)
 

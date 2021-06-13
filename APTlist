@@ -4,4 +4,5 @@ Chat:Danilus-s/OC-APT/master/APT's/APT-chat
 MySql:Danilus-s/OC-APT/master/APT's/APT-mysql
 Brutforce:Danilus-s/OC-APT/master/APT's/APT-brutforce
 Modem:Danilus-s/OC-APT/master/APT's/APT-modem
-[lib]Perm:Danilus-s/OC-APT/master/APT's/APT-perm.lua
+[lib]Perm:Danilus-s/OC-APT/master/APT's/APT-perm
+[EEPROM]Custom bios:Danilus-s/OC-APT/master/APT's/APT-bios

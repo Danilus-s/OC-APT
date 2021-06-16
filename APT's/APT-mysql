@@ -1,4 +1,4 @@
-dep:/lib/mysql.lua:Danilus-s/OpenLinux/master/lib/mysql.lua
-dep:/lib/mysql-s.lua:Danilus-s/OpenLinux/master/lib/mysql-s.lua
+dep:/lib/mysql.lua:Danilus-s/OC-APT/master/lib/mysql.lua
+dep:/lib/mysql-s.lua:Danilus-s/OC-APT/master/lib/mysql-s.lua
 file:/usr/bin/mysql.lua:Danilus-s/OC-APT/master/Files/mysql.lua
 file:/usr/bin/mysql-server.lua:Danilus-s/OC-APT/master/Files/mysql-server.lua

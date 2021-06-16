@@ -18,7 +18,7 @@ if args[1] == "maketoken" then
   f:close()
   return
 end
-if #args < 3 then print("Useage: chat connect [IP] [password]\nor chat host [roomName] [password] [name?]\nor chat token [token] [password]\nor chat maketoken"); return end
+if #args < 3 then print("Useage: chat connect [IP] [password] [name?]\nor chat host [roomName] [password]\nor chat token [token] [password]\nor chat maketoken"); return end
 
 
 
@@ -38,7 +38,7 @@ elseif args[1] == "token" then
   adr = f:read()
   f:close()
 else
-  print("Useage: chat connect [IP] [password]\nor chat host [roomName] [password] [name?]\nor chat token [token] [password]\nor chat maketoken")
+  print("Useage: chat connect [IP] [password] [name?]\nor chat host [roomName] [password]\nor chat token [token] [password]\nor chat maketoken")
   return
 end
 

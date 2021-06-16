@@ -3,6 +3,7 @@ local e = require("event")
 local s = require("shell")
 local fs = require("filesystem")
 local t = require("tty")
+local nw = require("network")
 local p = require("perm")
 local perm = require "perm"
 local m = c.modem
@@ -10,7 +11,7 @@ local m = c.modem
 if not c.isAvailable("modem") then print("'modem' not available"); return end
 
 local args, opt = s.parse(...)
-if #args < 2 then print("Use `filesender get|send [filename] [address]'"); return end
+if #args < 2 then print("Useage: filesender get|send [filename] [IP]"); return end
 
 local path
 local adr
@@ -110,11 +111,11 @@ if args[1] == "get" then
     get()
 elseif args[1] == "send" then
     path = s.resolve(args[2])
-    if not opt.b then adr = args[3] end
+    if not opt.b then adr = nw.getAdr(args[3]); if adr == nil then print("IP not found") return end end
     if fs.exists(path) and not fs.isDirectory(path) then
         send()
     else print("File is directory or not found")
         return
     end
-else print("Use `filesender get|send [address] [filename]'"); return
+else print("Useage: filesender get|send [filename] [IP]"); return
 end

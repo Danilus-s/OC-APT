@@ -3,6 +3,7 @@ local s = require("shell")
 local e = require("event")
 local p = require("perm")
 local t = require("tty")
+local nw = require("network")
 local cp = require("computer")
 local sha = require("sha2")
 local m = c.modem
@@ -17,7 +18,7 @@ if args[1] == "maketoken" then
   f:close()
   return
 end
-if #args < 3 then print("Use `chat connect [address] [password]'\nor `chat host [roomName] [password] [name?]'\nor `chat token [token] [password]'\nor `chat maketoken'"); return end
+if #args < 3 then print("Useage: chat connect [IP] [password]\nor chat host [roomName] [password] [name?]\nor chat token [token] [password]\nor chat maketoken"); return end
 
 
 
@@ -30,13 +31,14 @@ if args[1] == "host" then
   name = args[2]
   host = true
 elseif args[1] == "connect" then
-  adr = args[2]
+  adr = nw.getAdr(args[2])
+  if adr == nil then print("Wrong IP") return end
 elseif args[1] == "token" then
   local f = io.open(require("shell").resolve(args[2]))
   adr = f:read()
   f:close()
 else
-  print("Use `chat connect [address] [password]'\nor `chat host [roomName] [password] [name?]'\nor `chat token [token] [password]'\nor `chat maketoken'")
+  print("Useage: chat connect [IP] [password]\nor chat host [roomName] [password] [name?]\nor chat token [token] [password]\nor chat maketoken")
   return
 end
 

@@ -3,6 +3,7 @@ local perm = require("perm")
 local text = require("text")
 local term = require("term")
 local event = require("event")
+local nw = require("network")
 local modem = c.modem
 
 if not require("perm").getUsr("modem") then io.write("\27[31mPermission denied\27[m\n");return end
@@ -75,6 +76,15 @@ while true do
         io.write("  Message>>")
         local mes = io.read()
         if modem.send(addr, por, mes) then io.write("   Success\n") else io.write("   Failure\n") end
+    elseif inp == "send-ip" then
+        io.write("  Address>>")
+        local addr = nw.getAdr(text.trim(io.read()))
+        if addr == nil then print("Wrong IP") return end
+        io.write("  Port>>")
+        local por = tonumber(text.trim(io.read()))
+        io.write("  Message>>")
+        local mes = io.read()
+        if modem.send(addr, por, mes) then io.write("   Success\n") else io.write("   Failure\n") end
     elseif inp == "broadcast" or inp == "bc" then
         io.write("  Port>>")
         local por = perm.split(text.trim(io.read()), " ")
@@ -118,6 +128,24 @@ while true do
         else
             goto ret2
         end
+    elseif inp == "ping-s-ip" then
+        io.write("  Address>>")
+        local addr = nw.getAdr(text.trim(io.read()))
+        if addr == nil then print("Wrong IP") return end
+        io.write("  Port>>")
+        local por = tonumber(text.trim(io.read()))
+        io.write("  Message>>")
+        local mes = io.read()
+        if modem.send(addr, por, mes) then io.write("   Success\n\n") else io.write("   Failure\n\n") end
+        ::ret2::
+        local a = table.pack(event.pull())
+        if a[1] == "modem_message" then  
+            io.write("   From> " .. a[3] .. "\n   Port> " .. a[4] .. "\n   Distance> " .. a[5] .. "\n   Message> " .. tostring(a[6]) .. "\n\n")
+        elseif a[1] == "interrupted" then
+            io.write("   Interrupted\n") 
+        else
+            goto ret2
+        end
     elseif inp == "get" then
         --io.write("  Time out>>")
         --local to = tonumber(text.trim(io.read()))
@@ -145,6 +173,7 @@ while true do
         term.clear()
     elseif inp == "address" or inp == "adr" then
         io.write("  Modem address is> " .. modem.address .. "\n")
+        io.write("  Modem IP is> " .. nw.readIP(modem.address) .. "\n")
     else io.write("  " .. inp .. "> not found\n  Type `help' or `?'\n")
     end
 end

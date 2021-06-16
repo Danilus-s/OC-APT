@@ -7,6 +7,7 @@ local text = require("text")
 local perm = require("perm")
 local sql = require("mysql-s")
 local tty = require("tty")
+local nw = require("network")
 local m = c.modem
 
 
@@ -21,7 +22,7 @@ local pass = sha.sha3_256(text.trim(args[1]))
 local conn = {}
 
 print("MySql server started!")
-print("Address: " .. m.address .. "\nPort: 3306\nPath to database's: " .. path .. "\nPassword: " .. pass)
+print("Address: " .. m.address .. "(" .. nw.readIP(m.address) .. ")" .. "\nPort: 3306\nPath to database's: " .. path .. "\nPassword: " .. pass)
 
 local function checkConn(adr)
     for i = 1, #conn do

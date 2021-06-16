@@ -1,6 +1,7 @@
 local text = require("text")
 local sql = require("mysql")
 local sha = require("sha2")
+local nw = require("network")
 
 local conn = ""
 local pass
@@ -16,7 +17,8 @@ while true do
     if inp == "exit" then break
     elseif inp == "connect" then
         io.write("Address>")
-        local adr = io.read()
+        local adr = nw.getAdr(io.read())
+        if adr == nil then print("Wrong IP") return end
         io.write("Password>")
         pass = io.read()
         local re = sql.send(adr, "CONNECT " .. sha.sha3_256(pass))
